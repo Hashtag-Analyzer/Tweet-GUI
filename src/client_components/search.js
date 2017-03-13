@@ -26,7 +26,6 @@ const Nav = React.createClass({
            console.error(this.props.url, status, err.toString());
          }.bind(this)
       });
-      console.log("REACHED END");
       this.props.setLoad();
     }
   },
@@ -149,7 +148,7 @@ const Body = React.createClass({
         </ul>
       )
     }
-    else {
+    else {/*
       var Results = []
       for(var i = 0; i < this.props.results.length - 1; i++) {
         console.log('--------------------RESULT:' + this.props.results.length + '/' + (i + 1) + '--------------------');
@@ -172,13 +171,12 @@ const Body = React.createClass({
               </div>
           </li>
         )
-      });
+      });*/
       var markup = (
           <ul className="collapsible" data-collapsible="accordion">
-          <li>
-           <div className="collapsible-header center">Search results for "{this.props.query}"</div>
-          </li>
-          {docNodes}
+            <li>
+             <div className="collapsible-header center">Search results for "{this.props.query}"</div>
+            </li>}
           </ul>
       )
     }
@@ -200,7 +198,7 @@ const Container = React.createClass({
     }
   },
   parseResults : function (results, query) {
-    var docs = results.substring(results.indexOf("~STRT~") + 7, results.indexOf("~END~")).split("}\n");
+    var docs = results.split("\n");
     this.setState({results : docs, searching : false, query : query});
   },
   loader : function() {

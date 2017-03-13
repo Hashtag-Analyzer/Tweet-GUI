@@ -26,7 +26,6 @@ const Nav = React.createClass({
           console.error(this.props.url, status, err.toString());
         }.bind(this)
       });
-      console.log("REACHED END");
       this.props.setLoad();
     }
   },
@@ -307,56 +306,30 @@ const Body = React.createClass({
         )
       );
     } else {
-      var Results = [];
-      for (var i = 0; i < this.props.results.length - 1; i++) {
-        console.log('--------------------RESULT:' + this.props.results.length + '/' + (i + 1) + '--------------------');
-        Results.push(ParseFullResults(this.props.results[i].substring(1, this.props.results[i].length).replace(/\n/g, " ")));
-        console.log('~~~~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~~~');
+      /*
+      var Results = []
+      for(var i = 0; i < this.props.results.length - 1; i++) {
+      console.log('--------------------RESULT:' + this.props.results.length + '/' + (i + 1) + '--------------------');
+      Results.push(ParseFullResults(this.props.results[i].substring(1, this.props.results[i].length).replace(/\n/g, " ")));
+      console.log('~~~~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~~~');
       }
       console.log(Results);
-      var docNodes = Results.map(function (result, index) {
-        var hashtags = result.hashtags.toString();
-        return React.createElement(
-          "li",
-          { key: index },
-          React.createElement(
-            "div",
-            { className: "collapsible-header" },
-            React.createElement(
-              "i",
-              { className: "material-icons" },
-              "info"
-            ),
-            "Score: ",
-            result.score,
-            React.createElement("br", null),
-            " Date: ",
-            result.timestamp
-          ),
-          React.createElement(
-            "div",
-            { className: "collapsible-body" },
-            React.createElement(
-              "p",
-              null,
-              "Name: ",
-              result.name,
-              React.createElement("br", null),
-              "Message: ",
-              result.message,
-              React.createElement("br", null),
-              "Location: ",
-              result.location,
-              React.createElement("br", null),
-              "hashtags: ",
-              hashtags,
-              React.createElement("br", null),
-              "url-titles: ",
-              result.url_titles
-            )
-          )
-        );
-      });
+      var docNodes = Results.map(function(result, index) {
+      var hashtags = result.hashtags.toString();
+      return (
+      <li key={index}>
+       <div className="collapsible-header"><i className="material-icons">info</i>Score: {result.score}<br /> Date: {result.timestamp}</div>
+       <div className="collapsible-body">
+        <p>Name: {result.name}<br />
+           Message: {result.message}<br />
+           Location: {result.location}<br />
+           hashtags: {hashtags}<br />
+           url-titles: {result.url_titles}
+        </p>
+          </div>
+      </li>
+      )
+      });*/
       var markup = React.createElement(
         "ul",
         { className: "collapsible", "data-collapsible": "accordion" },
@@ -371,7 +344,7 @@ const Body = React.createClass({
             "\""
           )
         ),
-        docNodes
+        "}"
       );
     }
     return React.createElement(
@@ -394,7 +367,7 @@ const Container = React.createClass({
     };
   },
   parseResults: function (results, query) {
-    var docs = results.substring(results.indexOf("~STRT~") + 7, results.indexOf("~END~")).split("}\n");
+    var docs = results.split("\n");
     this.setState({ results: docs, searching: false, query: query });
   },
   loader: function () {
