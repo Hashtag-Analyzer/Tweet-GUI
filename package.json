@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "transpile": "NODE_ENV=production node_modules/.bin/webpack -p",
-    "transpile-client": "babel ./src/client_components/searchEngine.js -o ./src/client_components/searchEngine.compiled.js",
+    "transpile-client": "babel ./src/client_components/search.js -o ./src/client_components/search.compiled.js",
     "server": "NODE_ENV=production node_modules/.bin/babel-node --presets 'react,es2015' server.js",
     "start": "npm run transpile && npm run transpile-client && npm run server"
   },
